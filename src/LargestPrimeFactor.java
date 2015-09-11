@@ -1,16 +1,20 @@
 
 public class LargestPrimeFactor {
-  
-  boolean primeChecker (long num) {
-    for (long i = 2; i <= Math.sqrt(num); i++) {
-      if (num % i == 0 ) return false;
+
+  boolean prime(long num) {
+    if (num == 2) return true;
+    else if (num < 2 || num%2 == 0) return false;
+    for (long i = 3; i <= Math.sqrt(num); i+=2) {
+      if (num%i == 0) {
+        return false;
+      }
     }
     return true;
   }
-  
+
   long result (long num) {
     for (long i = 2; i <= num; i++) {
-      if (num % i == 0 && primeChecker(num/i)) {
+      if (num % i == 0 && prime(num/i)) {
         return num/i;
       }
     }
