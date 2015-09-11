@@ -7,28 +7,22 @@ public class LargestProductInASeries {
         long largestProduct = 0;
         long product = 1;
         int zeroCount = 0;
-        int length = 0;
         for (int i = 0; i < s.length(); i++) {
-            int digit = Character.getNumericValue(s.charAt(i));
-            int oldDigit;
+            int digit = s.charAt(i) - '0';
             if (digit == 0) {
-                zeroCount++;
-                length++;
-            } else if (digit > 0){
+                zeroCount ++;
+            } else {
                 product *= digit;
-                length++;
             }
-            if (length > num) {
-                oldDigit = Character.getNumericValue(s.charAt(i - num));
+            if (i >= num) {
+                int oldDigit = s.charAt(i - num) - '0';
                 if (oldDigit == 0) {
                     zeroCount--;
-                    length--;
-                } else if (oldDigit > 0){
+                } else {
                     product /= oldDigit;
-                    length--;
                 }
             }
-            if (product > largestProduct && zeroCount == 0) {
+            if (i >= num && product > largestProduct && zeroCount == 0) {
                 largestProduct = product;
             }
         }
