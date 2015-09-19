@@ -3,9 +3,6 @@
  */
 public class LatticePaths {
 
-    long total = 0;
-
-
     // DYNAMIC PROGRAMMING
 
     long result(int n) {
@@ -22,6 +19,8 @@ public class LatticePaths {
     }
 
 //// RECURSIVE
+//
+//    long total = 0;
 //
 //    void recursion(int x, int y, int n) {
 //        if (x == n || y == 0) {
