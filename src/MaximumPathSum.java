@@ -4,11 +4,11 @@
 public class MaximumPathSum {
 
     long result (String s) {
-        String[] arr = s.split("\n");
-        int size = arr.length;
+        String[] rows = s.split("\n");
+        int size = rows.length;
         int[][] triangle = new int[size][];
         for (int i = size - 1; i >=0 ; i--) {
-            String[] row = arr[i].split(" ");
+            String[] row = rows[i].split(" ");
             triangle[i] = new int[i+1];
             for (int j = 0; j < row.length; j++) {
                 triangle[i][j] = Integer.parseInt(row[j]);
@@ -17,7 +17,6 @@ public class MaximumPathSum {
                 }
             }
         }
-
         return triangle[0][0];
     }
 
