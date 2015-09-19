@@ -13,12 +13,9 @@ public class LatticePaths {
         grid[n][0]= 1;
         for (int y = 0; y <= n; y++) {
             for (int x = n; x>=0; x--) {
-                try {
-                    grid[x][y] += grid[x+1][y];
-                } catch (ArrayIndexOutOfBoundsException e) {}
-                try {
-                    grid[x][y] += grid[x][y-1];
-                } catch (ArrayIndexOutOfBoundsException e) {}
+                long right = (x < n) ? grid[x+1][y] : 0;
+                long down = (y > 0) ? grid[x][y-1] : 0;
+                grid[x][y] += right + down;
             }
         }
         return grid[0][n];
