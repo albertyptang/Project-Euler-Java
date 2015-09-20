@@ -5,7 +5,6 @@ import java.util.*;
  */
 public class NumberLetterCounts {
 
-
     private static final int[] numbers = new int[]{
             1,2,3,4,5,6,7,8,9,10,
             11,12,13,14,15,16,17,18,19,
@@ -28,31 +27,38 @@ public class NumberLetterCounts {
     String numberToWord(int number) {
         if (english.get(number) != null) {
             return english.get(number);
-        } else if (number == 1000) {
-            return "one thousand";
+        } else if (number > 999) {
+            int thousands = number/1000;
+            int rest = number%(thousands*1000);
+            if (rest == 0) {
+                return numberToWord(thousands) + " thousand";
+            } else if (rest > 99) {
+                return numberToWord(thousands) + " thousand " + numberToWord(rest);
+            } else {
+                return numberToWord(thousands) + " thousand and " + numberToWord(rest);
+            }
         } else if (number > 99) {
             int hundreds = number/100;
             int rest = number%(hundreds*100);
-            if (rest != 0) {
-                return english.get(hundreds) + " hundred and " + numberToWord(rest);
+            if (rest == 0) {
+                return numberToWord(hundreds) + " hundred";
             } else {
-                return english.get(hundreds) + " hundred";
+                return numberToWord(hundreds) + " hundred and " + numberToWord(rest);
             }
         } else if (number > 20) {
             int tens = number/10;
             int rest = number%(tens*10);
             if (rest != 0) {
-                return english.get(tens*10) + "-" + numberToWord(rest);
+                return numberToWord(tens*10) + "-" + numberToWord(rest);
             } else {
-                return english.get(tens*10);
+                return numberToWord(tens*10);
             }
-        } else {
-            return "";
         }
+        return "";
     }
 
     int result(int start, int end) {
-        if (end > 1000) {
+        if (end > 999999) {
             return 0;
         }
         int sum = 0;
